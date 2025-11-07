@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "projectName": "MockSat",
+    "configurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceRoot}/build/Debug/Mocksat.elf",
+            "name": "MockSat L4",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "STM32L4",
+            // "svdFile": "${workspaceRoot}/mcu_support/l4xx/STM32L4x2.svd",
+            "searchDir": [
+                "${workspaceRoot}/debug"
+            ],
+            "runToMain": true,
+            "configFiles": [
+                "${workspaceRoot}/debug/stlink-dap.cfg",
+                "${workspaceRoot}/debug/stm32l4x.cfg"
+            ],
+            "debuggerArgs": [
+                "-d",
+                "${workspaceRoot}",
+            ],
+            "preRestartCommands": [
+                "add-symbol-file build/Debug/Mocksat.elf",
+                "load",
+                "enable breakpoint",
+                "monitor reset"
+            ],
+            "showDevDebugOutput": true,
+        },
+    ]
+}
